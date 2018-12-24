@@ -1,7 +1,7 @@
 // <reference path='./index.d.ts'/>
 
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { HashRouter, Link } from "react-router-dom";
 
 import Routes from "./Routes";
 import NavBar from "./NavBar";
@@ -11,7 +11,7 @@ import Footer from "./Footer";
 const reactLogo = require("./assets/React-icon.png");
 
 const App = () => (
-  <BrowserRouter>
+  <HashRouter>
     <div> <NavBar />
     
     <main className="container">
@@ -21,7 +21,7 @@ const App = () => (
     </main>
     <Footer />
     </div>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 export default App;

@@ -17,7 +17,7 @@ const NavBar = () => (
   <div className="collapse navbar-collapse" id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
       <li className="nav-item">
-        <a className="nav-link" href="#"><FormattedMessage
+        <a className="nav-link" href="/"><FormattedMessage
                     id="home"
                     defaultMessage="Home"
                     
@@ -25,7 +25,7 @@ const NavBar = () => (
       </li>
       
       <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a className="nav-link dropdown-toggle" href="#/software" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <FormattedMessage
                     id="software"
                     defaultMessage="Software"
@@ -33,17 +33,17 @@ const NavBar = () => (
                 />
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/software/research"><FormattedMessage
                     id="research"
                     defaultMessage="Research"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/software/development"><FormattedMessage
                     id="development"
                     defaultMessage="Development"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/software/management"><FormattedMessage
                     id="management"
                     defaultMessage="Management"
                     
@@ -61,22 +61,22 @@ const NavBar = () => (
                 />
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/data/research"><FormattedMessage
                     id="research"
                     defaultMessage="Research"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/data/analytics"><FormattedMessage
                     id="analytics"
                     defaultMessage="Analytics"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/data/modelling"><FormattedMessage
                     id="modelling"
                     defaultMessage="Modelling"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/data/management"><FormattedMessage
                     id="management"
                     defaultMessage="Management"
                     
@@ -94,12 +94,12 @@ const NavBar = () => (
                 />
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/solution/trading"><FormattedMessage
                     id="trading"
                     defaultMessage="Trading"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/solutions/sports"><FormattedMessage
                     id="sport"
                     defaultMessage="Sport"
                     
@@ -118,22 +118,22 @@ const NavBar = () => (
                 />
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a className="dropdown-item" href="#"><FormattedMessage
+        <a className="dropdown-item" href="#/company/history"><FormattedMessage
                     id="history"
                     defaultMessage="History"
                     
                 /></a>
-        <a className="dropdown-item" href="#"><FormattedMessage
+        <a className="dropdown-item" href="#/company/customers"><FormattedMessage
                     id="customers"
                     defaultMessage="Customers"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/company/team"><FormattedMessage
                     id="team"
                     defaultMessage="Team"
                     
                 /></a>
-          <a className="dropdown-item" href="#"><FormattedMessage
+          <a className="dropdown-item" href="#/company/contact"><FormattedMessage
                     id="contact"
                     defaultMessage="Contact"
                     
