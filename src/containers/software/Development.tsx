@@ -14,7 +14,7 @@ const Management = () => (
       </p><p>
       We are expert in Statistical and Mathematical software as SAS, R, Octave or Matlab. 
       </p><p>
-      We work with the best framework or tools supported by the industry as SVN, Git, Spark, Elasticsearch, Lucene, MongoDb, Spring, MySql, Sybase, or Maven. 
+      We work with the best framework or tools supported by the industry as SVN, WildFly, Kafka, Git, Spark, Elasticsearch, Lucene, MongoDb, Spring, MySql, Sybase, or Maven. 
       </p><p>
       Visual studio, Intellij or Eclipse are used to manage the code development. 
       </p><p>
