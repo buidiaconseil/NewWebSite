@@ -14,7 +14,7 @@
 }
 
 .bg-light{
-  background-color: #fefefe!important; 
+  background-color: #717279!important; 
 }
 
 .dropdown-menu {
@@ -28,10 +28,10 @@
    padding: .5rem 0; 
    margin: .125rem 0 0; 
    font-size: 1rem; 
-   color: #212529; 
+   color: #062e57; 
    text-align: left; 
    list-style: none; 
-   background-color: #ffffff; 
+   background-color: #afafaf; 
    background-clip: padding-box; 
    border: 1px solid rgba(0,0,0,.15); 
    border-radius: .25rem; 
@@ -62,4 +62,7 @@
   height: 32rem;
   
   
+}
+.navbar.navbar-light .breadcrumb .nav-item .nav-link, .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+  color: #fff;
 }

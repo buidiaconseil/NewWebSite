@@ -33,11 +33,7 @@ const NavBar = () => (
                 />
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a className="dropdown-item" href="#/software/research"><FormattedMessage
-                    id="research"
-                    defaultMessage="Research"
-                    
-                /></a>
+         
           <a className="dropdown-item" href="#/software/development"><FormattedMessage
                     id="development"
                     defaultMessage="Development"
@@ -76,11 +72,7 @@ const NavBar = () => (
                     defaultMessage="Modelling"
                     
                 /></a>
-          <a className="dropdown-item" href="#/data/management"><FormattedMessage
-                    id="management"
-                    defaultMessage="Management"
-                    
-                /></a>
+          
           
         </div>
       </li>

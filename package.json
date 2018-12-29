@@ -83,6 +83,7 @@
   "dependencies": {
     "fs-extra": "^7.0.1",
     "mdbootstrap": "^4.6.0",
+    "office-ui-fabric-react": "^6.118.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-intl": "^2.7.2",
