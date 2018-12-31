@@ -29,7 +29,7 @@ This score appear identical for the 2010,2011 and 2012. I guess that apparently 
 
 In 2013, a big change has appear and the transformation become more complex and just 50% have been transformed in less than 2 months.
 
-In 2014, it is more comples where just 20% are ttrasnformed in less than 2 months.
+In 2014, it is more comples where just 20% are transformed in less than 2 months.
 
 All this plot permiits to identify that at the beginning on acquiring new client, this client were very interested on the offer of Ari Bnb. But during the time the new acquistion has certainly acquire different curomers with different feeling with the site. I can t explain the transformation because I m not inside Air bnb , but it is very interesting act.
 </p><p>
