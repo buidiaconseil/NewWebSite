@@ -5,14 +5,22 @@ const Development = () => (
     <hr/>
     <h2>Team</h2>
     <p>
+      <img src="https://raw.githubusercontent.com/buidiaconseil/NewWebSite/master/src/assets/SebRugby.png"></img>
       <h3>Sébastien DIAZ</h3>
       <h4>CEO</h4>
 <p>
-
-He most recently served as Chairman and CEO of Formation Data Services, developers of a revolutionary cloud software storage platform for replace traditional arrays. He previously worked in various executive capacities at EMC, where he was instrumental in helping transform the business from a single-product hardware company to a leading IT solutions provider. Before EMC, Mark was Vice President and General Manager of Hewlett-Packard/Compaq/Digital’s $2.5 billion Enterprise Storage Group, which was the largest storage organization in the world at the time, and served in various storage-related business, engineering and product development roles at Digital Equipment Corporation.
-
-He is currently a board member at Ciber Corporation, a leading provider of IT services. Mark has been granted more than 10 U.S. patents for hardware and software technology. He graduated from the University of Colorado, Boulder in 1984 with a B.S. in Mechanical Engineering.
+Player and Rugby enthusiast, this sport has given him an ability to this exceeded in all his achievements.
 </p>
+<p>
+He began his career as a consultant on financial solutions at Andersen Consulting and Accenture. He continued as manager and architect of new insurance technology solutions at Cegedim. Then he spent at Capgemini to develop solutions in financial and public management. He worked in particular at the Prime Minister's Office.
+</p>
+<p>
+He continued his career at Reuters in Tranding solutions in Financial Market.
+</p>
+<p>
+He most recently served as a Principal Architect at Finastra , developers of a revolutionary cloud software financial platform for replace traditional arrays. 
+</p>
+
     </p>
   </div>
 );
