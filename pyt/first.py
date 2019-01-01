@@ -93,6 +93,7 @@ tokenpair=response.json()
 while True:
     print("new loop")
     for instrument in tokenpair:
+      try:
         time.sleep(0.15)
         instrument_id=instrument['instrument_id']
         request_path = '/api/spot/v3/instruments/'+instrument_id+'/candles?granularity=60'
@@ -100,7 +101,7 @@ while True:
         header = get_header(key1, signature(ts, 'GET', request_path, key2), ts, 'sefidom')
         
         # do request
-        response = requests.get(base_url + request_path, headers=header)
+        response = requests.get(base_url + request_path, headers=header, timeout=15)
         # json
     
 
@@ -124,21 +125,9 @@ while True:
                 if (maxTime<dateutil.parser.parse(x['time']).timestamp()):
                     print(fileCsv+' add '+str(dateutil.parser.parse(x['time']).timestamp()))
                     spamwriter.writerow([dateutil.parser.parse(x['time']).timestamp(), x['open'], x['close'],x['low'],x['high'],x['volume']])
+      except:
+        print("error connection")	
 
 
-# [{
-#     "id": "BTC",
-#     "name": “Bitcoin”，
-#      "deposit": "1",
-#      "withdraw": “1”,
-#       “withdraw_min”:”0.000001btc”
-# }, {
-#     "id": "ETH",
-#     "name": “Ethereum”,
-#     "deposit": "1",
-#      "withdraw": “1”，
-#      “withdraw_min”:”0.0001eth”
-#     }
-#  …
-# ]
+
 
