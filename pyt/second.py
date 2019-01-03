@@ -41,7 +41,7 @@ for root, dirs, files in os.walk("."):
                         listRow.append(row)
                         lot=lot+1
             filecsv='interval-'+key1+"-"+key2+".csv"
-            with open(fileCsv, 'a', newline='') as csvfile:
+            with open(filecsv, 'a', newline='') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=';',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
                 for row in listInterval:
