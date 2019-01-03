@@ -34,7 +34,8 @@ for root, dirs, files in os.walk("."):
                                     timeMin=rowListmim[0]
                                     timeMax=rowListmax[0]
                                     interval=float(rowListmax[2])-float(rowListmim[2])
-                                    listInterval.append({interval:interval,timeMin:timeMin,timeMax:timeMax})
+                                    listInterval.append({'interval':interval,'timeMin':timeMin,'timeMax':timeMax})
+                        listRow.pop(0)
                                 
                         lot=lot=lot-1
                     else:
