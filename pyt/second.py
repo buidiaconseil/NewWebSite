@@ -23,7 +23,7 @@ for root, dirs, files in os.walk("."):
                 print ('clean '+filecsv)
             listInterval =[]
 
-            for maxRow in [20,60,300]:
+            for maxRow in [60,300]:
                 
                 with open(filename, newline='') as csvfile:
                     spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
@@ -53,17 +53,27 @@ for root, dirs, files in os.walk("."):
                             lot=lot+1
                 finalList=[]
                 setTime=set()
+                setTimeMax=set()
+                listInterval=sorted(listInterval, key=lambda student: float(student['timeMin']))
+                
                 for row in listInterval:
                     
                     timeref=row['timeMin']
                     if timeref in setTime:
                         continue
+                    if row['timeMax'] in setTimeMax:
+                        continue 
                     setTime.add(timeref)
                     best=row
                     for rowSec in listInterval:
+                        if rowSec['timeMax'] in setTimeMax:
+                            continue
                         if timeref==rowSec['timeMin'] and rowSec['interval']>row['interval']:
                             best=rowSec
+                    setTimeMax.add(best['timeMax'])
                     finalList.append(best)
+                
+
                 finalList=sorted(finalList, key=lambda student: float(student['interval']))
                 with open(filecsv, 'a', newline='') as csvfile:
                     spamwriter = csv.writer(csvfile, delimiter=';',
