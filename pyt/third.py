@@ -26,6 +26,14 @@ for root, dirs, files in os.walk("."):
             print('key1'+key1)
             print('key2'+key2)
             print(filename)
+            
+            newListOfData=[]
+            resorted={'open': [],'high': [],'low': [], 'close': [],'volume':[],'time':[]}
+            with open(filename, newline='') as csvfile:
+                    spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+                    for row in spamreader:
+                        newListOfData.append({'open': float(row[1]),'high': float(row[4]),'low': float(row[3]), 'close': float(row[2]),'volume':float(row[5]),'time':row[0]})
+            
             filecsv='interval-'+key1+"-"+key2+".csv"
             listLong = []
             listShort = []
@@ -34,18 +42,12 @@ for root, dirs, files in os.walk("."):
                     for row in spamreader:
                         listLong.append(row[1])
                         listShort.append(row[2])
-                        if len(listLong) >100 :
+                        if len(listLong) >10*len(newListOfData)/100.0 :
                             listLong.pop(0)
                             listShort.pop(0)
                     listLong=set(listLong)
                     listShort=set(listShort)
-            newListOfData=[]
-            resorted={'open': [],'high': [],'low': [], 'close': [],'volume':[],'time':[]}
-            with open(filename, newline='') as csvfile:
-                    spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
-                    for row in spamreader:
-                        newListOfData.append({'open': float(row[1]),'high': float(row[4]),'low': float(row[3]), 'close': float(row[2]),'volume':float(row[5]),'time':row[0]})
-            
+
             newListOfData=sorted(newListOfData, key=lambda student: float(student['time']))
             for row in newListOfData:
                 resorted['open'].append(row['open'])
@@ -211,6 +213,10 @@ for root, dirs, files in os.walk("."):
             var_real = talib.VAR(resorted['close'])
 
             fileoutput='indicators-'+key1+"-"+key2+".csv"
+            try:
+                os.remove(fileoutput)
+            except:
+                print ('clean '+fileoutput)
             with open(fileoutput, 'a', newline='') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=';',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
