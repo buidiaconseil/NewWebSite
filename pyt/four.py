@@ -30,16 +30,18 @@ for root, dirs, files in os.walk("."):
             
             fileinput='indicators-'+key1+"-"+key2+".csv"
             fileoutput='indicators-'+key1+"-"+key2+".mpk"
-            with open(fileoutput, 'wb') as outfile:
-            
-                with open(fileinput, newline='') as csvfile:
-                    spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
-                    for row in spamreader:
-                        columns=[]
-                        for column in row:
-                            columns.append(float(column))
-                        msgpack.pack(columns, outfile)
-
+            try:
+                with open(fileoutput, 'wb') as outfile:
+                
+                    with open(fileinput, newline='') as csvfile:
+                        spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+                        for row in spamreader:
+                            columns=[]
+                            for column in row:
+                                columns.append(float(column))
+                            msgpack.pack(columns, outfile)
+            except:
+                print("Error during extraction")
 
 
             
