@@ -62,7 +62,10 @@ for root, dirs, files in os.walk("."):
                                     
                                     key=rowListmim[0]+":"+rowListmax[0]
                                     listmin=float(rowListmim[2])
-                                    newInterval=(float(rowListmax[2])-listmin)/listmin
+                                    if listmin==0:
+                                        newInterval=0
+                                    else:    
+                                        newInterval=(float(rowListmax[2])-listmin)/listmin
                                     if newInterval>interval:
                                         timeMin=rowListmim[0]
                                         timeMax=rowListmax[0]

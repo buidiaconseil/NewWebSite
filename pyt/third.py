@@ -23,16 +23,18 @@ for root, dirs, files in os.walk("."):
             if m is not None:
                 key1=m.group('key1')
                 key2=m.group('key2')
+            
             print('key1'+key1)
             print('key2'+key2)
             print(filename)
-            try:
+            if 1==1 :
                 newListOfData=[]
                 resorted={'open': [],'high': [],'low': [], 'close': [],'volume':[],'time':[]}
                 with open(filename, newline='') as csvfile:
                         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
                         for row in spamreader:
-                            newListOfData.append({'open': float(row[1]),'high': float(row[4]),'low': float(row[3]), 'close': float(row[2]),'volume':float(row[5]),'time':row[0]})
+                            if len(row)==6 :
+                                newListOfData.append({'open': float(row[1]),'high': float(row[4]),'low': float(row[3]), 'close': float(row[2]),'volume':float(row[5]),'time':row[0]})
                 
                 filecsv='interval-'+key1+"-"+key2+".csv"
                 listLong = []
@@ -393,8 +395,7 @@ for root, dirs, files in os.walk("."):
                         aval.append(var_real[counter]) 
                         spamwriter.writerow(aval)
                         counter=counter+1
-            except:
-                print ("some errors")
+           
 
 
             
