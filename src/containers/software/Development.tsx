@@ -4,7 +4,7 @@ const Management = () => (
   <div className="container">
   <div className="row"><div className="col-sm-2">
   </div>
-  <div className="col-sm-7">
+  <div className="col-sm-7 left">
     <hr/>
     <h2>Development of application.<img src="https://sebadiaz.github.io/ricito/img/wordcloud.png" width="100" /></h2>
     <p>
