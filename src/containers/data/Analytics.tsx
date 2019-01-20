@@ -8,31 +8,19 @@ import { Switch, Route } from 'react-router';
 const Development = () => (
   <div >
     <hr/>
+    <h1>Analytics</h1>
     <div className="container">
+    <div class="btn-group btn-group-sm">
+    <a href="#/data/analytics" type="button" class="btn btn-secondary">Introduction</a>
+    <a href="#/data/analytics/condensateur" type="button" class="btn btn-secondary">Example: Capacitor</a>
+    </div>
+    <div class="btn-group btn-group-sm">
+    <a href="#/data/analytics/crimeusa" type="button" class="btn btn-secondary">Example: USA Crime </a>
+    <a href="#/data/analytics/airbnb" type="button" class="btn btn-secondary">Example: Air Bnb</a>
+
+</div>
      <div className="row">
-      <div className="col-sm-2">
-      <ul className="nav flex-column">
-  <li className="nav-item">
-    <a className="nav-link" href="#/data/analytics">Introduction</a>
-  </li>
-  
-  <li className="nav-item">
-
-    <a className="nav-link" href="#/data/analytics/condensateur">Example:Capacitor </a>
-  </li>
-  <li className="nav-item">
-
-    <a className="nav-link" href="#/data/analytics/crimeusa">Example:USA Crime </a>
-  </li>
-  <li className="nav-item">
-
-    <a className="nav-link" href="#/data/analytics/airbnb">Example:Air Bnb </a>
-  </li>
-
-  
-</ul>
-      </div>
-      <div className="col-md-7">
+      <div className="col">
       <Switch>
       <Route exact path="/data/analytics" component={Introduction}/>
   <Route path="/data/analytics/condensateur"  component={Condensateur}/>

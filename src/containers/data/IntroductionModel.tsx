@@ -6,7 +6,7 @@ export default class Hello extends React.Component<HelloProps, {}> {
         return (
         
 <div>
-<h2>Data Modelling.<img width="100" src="http://www.creative-commons-images.com/handwriting/images/learning.jpg" /></h2>
+<h2>Data Modelling.</h2>
     <p>
     Our work on data modelling target the best tools and methods usable for your need. 
     </p><p>

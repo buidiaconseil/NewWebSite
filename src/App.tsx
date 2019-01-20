@@ -12,15 +12,15 @@ const reactLogo = require("./assets/React-icon.png");
 
 const App = () => (
   <HashRouter>
-    <div> <NavBar />
+    <span > <NavBar />
     
-    <main className="container">
+    
       
       
       <Routes />
-    </main>
+    
     <Footer />
-    </div>
+    </span>
   </HashRouter>
 );
 

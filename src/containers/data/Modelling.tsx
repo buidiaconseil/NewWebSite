@@ -7,27 +7,21 @@ import { Switch, Route } from 'react-router';
 const Development = () => (
   <div>
      <hr/>
+     <h1>Modelling</h1>
     <div className="container">
+
+    <div class="btn-group btn-group-sm">
+    <a href="#/data/modelling" type="button" class="btn btn-secondary">Introduction</a>
+    <a href="#/data/modelling/krigeage" type="button" class="btn btn-secondary">Example: Spatial Modelling</a>
+    </div>
+    <div class="btn-group btn-group-sm">
+    <a href="#/data/modelling/chester" type="button" class="btn btn-secondary">Example: Crime at Chester </a>
+    
+
+</div>
      <div className="row">
-      <div className="col-sm-2">
-      <ul className="nav flex-column">
-  <li className="nav-item">
-    <a className="nav-link" href="#/data/modelling">Introduction</a>
-  </li>
-  
-  <li className="nav-item">
-
-    <a className="nav-link" href="#/data/modelling/krigeage">Example:Spatial Modelling</a>
-  </li>
-  <li className="nav-item">
-
-    <a className="nav-link" href="#/data/modelling/chester">Example:Crime at Chester</a>
-  </li>
-
-  
-</ul>
-      </div>
-      <div className="col-md-7">
+      
+      <div className="col">
       <Switch>
       <Route exact path="/data/analytics" component={Introduction}/>
   <Route path="/data/modelling/krigeage"  component={GeoModelling}/>

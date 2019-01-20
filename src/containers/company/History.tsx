@@ -4,7 +4,7 @@ const Development = () => (
   <div>
     <hr />
     <h1>Since 2018,</h1>
-    <p>Buisson Diaz Conseil is a Software Services Company spéecialized in Data Management and Software Development.</p>
+    <p>Buisson Diaz Conseil is a Software Services Company specialized in Data Management and Software Development.</p>
     <p>Buisson Diaz Conseil supports you to deliver the advice and all the expertise expected by customers who are always taking more initiatives driven by new developments such as cloud, big data or mobility..</p>
     <p>Buisson Diaz Conseil  has been growing steadily since the beginning of its existence.</p>
     <p>

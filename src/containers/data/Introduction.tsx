@@ -6,7 +6,7 @@ export default class Hello extends React.Component<HelloProps, {}> {
         return (
         
 <div>
- <h2 >Deep Data Analitycs. <img src="http://www.picpedia.org/handwriting/images/analyze.jpg" width="100" /></h2>
+ <h2 >Deep Data Analitycs.</h2>
  <p className="lead text-left">
    We are expert to sample, transform, evaluate and analyse your data. 
    </p><p>

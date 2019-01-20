@@ -3,7 +3,7 @@ import React from "react";
 const Research = () => (
   <div>
     <hr />
-    <h2>Research Methods and Statistics. <img src="http://www.picpedia.org/handwriting/images/research.jpg" width="100"/></h2>
+    <h2>Research Methods and Statistics. </h2>
     <p>
     The Research Methodology and Statistical Reasoning includes topics ranging from what is a variable to, where can one use a two-way ANOVA. 
     </p><p>

@@ -2,11 +2,10 @@ import React from "react";
 
 const Management = () => (
   <div className="container">
-  <div className="row"><div className="col-sm-2">
-  </div>
-  <div className="col-sm-7 left">
+  <div className="row">
+  <div className="col">
     <hr/>
-    <h2>Development of application.<img src="https://sebadiaz.github.io/ricito/img/wordcloud.png" width="100" /></h2>
+    <h2>Development of application.</h2>
     <p>
       We are skilled on different programming languages and technologies. 
       </p><p>
@@ -20,7 +19,7 @@ const Management = () => (
       </p><p>
       We support Docker, kubernetes, AWS or Azure.
     </p>
-    <h2>Cloud Development.<img src="http://www.creative-commons-images.com/handwriting/images/cloud-computing.jpg" width="100" /></h2>
+    <h2>Cloud Development.</h2>
     <p>
     We push and develop your solution on the Cloud. 
     </p><p>
