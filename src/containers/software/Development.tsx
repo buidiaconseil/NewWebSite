@@ -3,8 +3,8 @@ import React from "react";
 const Management = () => (
   <div className="container">
   <div className="row">
-  <div className="col">
-    <hr/>
+ <div className="col">
+
     <h2>Development of application.</h2>
     <p>
       We are skilled on different programming languages and technologies. 
