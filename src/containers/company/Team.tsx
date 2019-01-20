@@ -6,6 +6,7 @@ const Development = () => (
     <h2>Team</h2>
     <p>
       <img src="https://raw.githubusercontent.com/buidiaconseil/NewWebSite/master/src/assets/SebRugby.png"></img>
+      <img src="https://raw.githubusercontent.com/buidiaconseil/NewWebSite/master/src/assets/titreRCF.png"></img>
       <h3>Sébastien DIAZ</h3>
       <h4>CEO</h4>
 <p>
