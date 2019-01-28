@@ -28,6 +28,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(mpk)$/,
+        use: [
+          {
+            loader: 'arraybuffer-loader',
+            options: {},
+          },
+        ],
+      },
+      {
         test: /\.tsx?$/,
         loader: 'babel-loader',
       },

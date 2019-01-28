@@ -35,11 +35,12 @@ for root, dirs, files in os.walk("."):
                 
                     with open(fileinput, newline='') as csvfile:
                         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+                        columns=[]
+                        spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
                         for row in spamreader:
-                            columns=[]
                             for column in row:
                                 columns.append(float(column))
-                            msgpack.pack(columns, outfile)
+                        msgpack.pack(columns, outfile)
             except:
                 print("Error during extraction")
 
