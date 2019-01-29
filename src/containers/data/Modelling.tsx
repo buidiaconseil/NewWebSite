@@ -10,12 +10,12 @@ const Development = () => (
      <h1>Modelling</h1>
     <div className="container">
 
-    <div class="btn-group btn-group-sm">
-    <a href="#/data/modelling" type="button" class="btn btn-secondary">Introduction</a>
-    <a href="#/data/modelling/krigeage" type="button" class="btn btn-secondary">Example: Spatial Modelling</a>
+    <div className="btn-group btn-group-sm">
+    <a href="#/data/modelling" type="button" className="btn btn-secondary">Introduction</a>
+    <a href="#/data/modelling/krigeage" type="button" className="btn btn-secondary">Example: Spatial Modelling</a>
     </div>
-    <div class="btn-group btn-group-sm">
-    <a href="#/data/modelling/chester" type="button" class="btn btn-secondary">Example: Crime at Chester </a>
+    <div className="btn-group btn-group-sm">
+    <a href="#/data/modelling/chester" type="button" className="btn btn-secondary">Example: Crime at Chester </a>
     
 
 </div>

@@ -39,7 +39,7 @@ const Routes = () => (
     <Route path="/company/privacy" component={Privacy} />
     <Route path="/company/legal" component={Legal} />
     <Route path="/company/terms" component={Terms} />
-
+<Route path="/solutions" component={Trading} />
     
   </Switch>
   </section>

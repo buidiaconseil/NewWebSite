@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dev = process.env.NODE_ENV !== 'production';
 
 const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
@@ -15,6 +15,7 @@ const DefinePluginConfig = new webpack.DefinePlugin({
 });
 
 module.exports = {
+
   devServer: {
     host: 'localhost',
     port: '3000',
@@ -66,7 +67,18 @@ module.exports = {
     path: path.join(__dirname, '/build'),
   },
   mode: dev ? 'development' : 'production',
-  plugins: dev
-    ? [HTMLWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]
-    : [HTMLWebpackPluginConfig, DefinePluginConfig],
+  plugins:
+
+            dev
+                ? [HTMLWebpackPluginConfig, new webpack.HotModuleReplacementPlugin(),new CopyWebpackPlugin([
+                                                                                                     { from: './pyt' }
+                                                                                                 ],
+                                                                                                      { debug: 'debug'})]
+                : [HTMLWebpackPluginConfig, DefinePluginConfig,new CopyWebpackPlugin([
+                                                                               { from: './pyt' }
+                                                                           ],
+                                                                                { debug: 'debug' })],
+
+
+
 };
