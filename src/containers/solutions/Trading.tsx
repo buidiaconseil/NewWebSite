@@ -6,8 +6,7 @@ const axios = require('axios');
 
 axios.get('indicators-ETH-BTC.mpk',{
                                                                                                            headers: {
-                                                                                                               'Content-Type': 'text/plain',
-                                                                                                                responseType: 'blob'
+                                                                                                                responseType: 'arraybuffer'
                                                                                                            }
                                                                                                        })
   .then(function (response) {
