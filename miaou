@@ -1,0 +1,63 @@
+from bs4 import BeautifulSoup
+
+import requests
+import csv
+
+urldepart = "http://ww w.f f -  v oy a nc e.c om/"
+
+visitedUrl = set()
+urlToVisit = [urldepart]
+
+with open('eggs.csv', 'w', newline='') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=',')
+
+    def lit_page(url):
+        global visitedUrl
+        global spamwriter
+        global urlToVisit
+        print(".")
+        r  = requests.get(url)
+        visitedUrl.add(url)
+        data = r.text
+
+        soup = BeautifulSoup(data)
+
+        for link in soup.find_all('a'):
+            urlHref=link.get('href')
+            
+            if urlHref is not None and urlHref not in visitedUrl and (urlHref[0]=='.' or urlHref[0]=='/' or urlHref.startswith(urldepart)):
+                if urlHref[0]=='.' or urlHref[0]=='/':
+                    urlToVisit.append(urldepart+urlHref)
+                else:
+                    urlToVisit.append(urlHref)
+
+        for link in soup.find_all('div'):
+            classe=link.get('class')
+            
+            if classe is not None and 'post' in classe and 'row' in classe and 'panel' in classe:
+                for link2 in link.find_all('div'):
+                    classe2=link2.get('class')
+                    if "postbody" in classe2 :
+                        member = None
+                        content = None
+                        for link3 in link2.find_all('p'):
+                            classe3=link3.get('class')
+                            if "author" in classe3:
+                                count=0
+                                for link4 in link3.find_all('a'):
+                                    if count>0:
+                                        member=link4.get_text()
+                                    count=count+1
+                        if member is not None:
+                            for link3 in link2.find_all('div'):
+                                classe3=link3.get('class')
+                                if "content" in classe3:
+                                    content=link3.get_text()
+                            spamwriter.writerow([url,member,content])
+        
+            
+    for url in urlToVisit:
+        lit_page(url)
+
+
+            
