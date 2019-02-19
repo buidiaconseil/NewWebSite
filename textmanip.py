@@ -16,6 +16,9 @@ from nltk import word_tokenize as wt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import AffinityPropagation
+from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
 sp_pattern = re.compile( """[\.\!\"\s\?\-\,\']+""", re.M)
@@ -82,8 +85,10 @@ X = vectorizer.fit_transform(corpus)
 print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
-clustering = AgglomerativeClustering().fit(X.toarray())
+X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
+clustering = KMeans(n_clusters=10, random_state=0).fit(X_train.toarray())
 clustering
-plt.scatter(X.toarray()[:, 0], X.toarray()[:, 1], c=clustering.labels_,
+plt.scatter(X_train.toarray()[:, 0], X_train.toarray()[:, 1], c=clustering.labels_,
                         cmap=plt.cm.nipy_spectral)
+plt.show()
 
