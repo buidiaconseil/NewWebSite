@@ -19,7 +19,12 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import AffinityPropagation
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA, IncrementalPCA
+import pandas as pd
+from mlxtend.preprocessing import TransactionEncoder
+from mlxtend.frequent_patterns import apriori
 import matplotlib.pyplot as plt
+from mlxtend.frequent_patterns import association_rules
 
 sp_pattern = re.compile( """[\.\!\"\s\?\-\,\']+""", re.M)
 stupid_tokenizer = sp_pattern.split
@@ -74,7 +79,9 @@ with open('eggs.csv') as csv_file:
             map(
                 stemmer2.stem, filter(
                     fr_stop,
-                    stupid_tokenizer(data)
+                    stupid_tokenizer(data.replace("é", "e").replace("è", "e").replace("â", "a")
+                                     .replace("ê", "e").replace("ù","u").replace("û","u")
+                                     .replace("ë","e").replace("ü","u").replace("à","a"))
                 )
             )
         )
@@ -86,9 +93,22 @@ print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
 X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
-clustering = KMeans(n_clusters=10, random_state=0).fit(X_train.toarray())
+clustering = KMeans(n_clusters=5, random_state=0).fit(X_train.toarray())
 clustering
-plt.scatter(X_train.toarray()[:, 0], X_train.toarray()[:, 1], c=clustering.labels_,
+
+pca = PCA(n_components=100)
+X_pca = pca.fit_transform(X_train.toarray())
+
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=clustering.labels_,
                         cmap=plt.cm.nipy_spectral)
 plt.show()
+
+te = TransactionEncoder()
+te_ary = te.fit(X_train.toarray()).transform(X_train.toarray())
+df = pd.DataFrame(te_ary, columns=te.columns_)
+frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
+
+frequent_itemsets
+
+association_rules(frequent_itemsets, metric="confidence", min_threshold=0.7)
 
