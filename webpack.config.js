@@ -73,11 +73,13 @@ module.exports = {
                 ? [HTMLWebpackPluginConfig, new webpack.HotModuleReplacementPlugin(),new CopyWebpackPlugin([
                                                                                                      { from: './pyt' }
                                                                                                  ],
-                                                                                                      { debug: 'debug'})]
+                                                                                                      { 
+                                                                                                      cache: true})]
                 : [HTMLWebpackPluginConfig, DefinePluginConfig,new CopyWebpackPlugin([
                                                                                { from: './pyt' }
                                                                            ],
-                                                                                { debug: 'debug' })],
+                                                                                { 
+                                                                                cache: true})],
 
 
 

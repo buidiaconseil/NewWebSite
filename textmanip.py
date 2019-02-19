@@ -6,7 +6,7 @@ import nltk
 import nltk
 #nltk.download('stopwords')
 #nltk.download('punkt')
-
+import csv
 import nltk.data
 import re
 from nltk.corpus import stopwords
@@ -14,7 +14,9 @@ from nltk.stem.snowball import SnowballStemmer
 
 from nltk import word_tokenize as wt
 from sklearn.feature_extraction.text import TfidfVectorizer
-
+from sklearn.cluster import KMeans
+from sklearn.cluster import AgglomerativeClustering
+import matplotlib.pyplot as plt
 
 sp_pattern = re.compile( """[\.\!\"\s\?\-\,\']+""", re.M)
 stupid_tokenizer = sp_pattern.split
@@ -59,9 +61,29 @@ text = " ".join(
     )
 )
 
-corpus = [text]
-vectorizer = TfidfVectorizer()
+corpus = []
+
+with open('eggs.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    for row in csv_reader:
+        data=row[2]
+        text = " ".join(
+            map(
+                stemmer2.stem, filter(
+                    fr_stop,
+                    stupid_tokenizer(data)
+                )
+            )
+        )
+        corpus.append(text)
+        
+vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=3000)
 X = vectorizer.fit_transform(corpus)
 print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
+clustering = AgglomerativeClustering().fit(X.toarray())
+clustering
+plt.scatter(X.toarray()[:, 0], X.toarray()[:, 1], c=clustering.labels_,
+                        cmap=plt.cm.nipy_spectral)
+

@@ -6,11 +6,22 @@ import { RandomForestClassifier } from 'machinelearn/ensemble';
 import { SGDClassifier } from 'machinelearn/linear_model';
 import { KNeighborsClassifier } from 'machinelearn/neighbors';
 
+
 axios.get('indicators-ETH-BTC.csv')
+
+var Papa = require("papaparse/papaparse.min.js");
+
+axios.get('indicators-ETH-BTC.csv',{
+                                                                                                           headers: {
+                                                                                                                responseType: 'arraybuffer'
+                                                                                                           }
+                                                                                                       })
+
   .then(function (response) {
     // handle success
     console.log(response);
     console.log(typeof(response.data));
+
     var data = Papa.parse(response.data,{
                                        	dynamicTyping: true
                                        });
@@ -54,6 +65,10 @@ axios.get('indicators-ETH-BTC.csv')
     model.fit(xs, ys, {epochs: 10}).then(() => {
         console.log(JSON.stringify(model.outputs[0].shape));
     });
+
+
+    var decodedData=Papa.parse(response.data);
+    console.log(decodedData);
 
   })
 
