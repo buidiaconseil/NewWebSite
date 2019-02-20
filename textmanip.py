@@ -71,7 +71,7 @@ text = " ".join(
 )
 
 corpus = []
-
+corpusOriginal = []
 with open('eggs.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     for row in csv_reader:
@@ -86,26 +86,36 @@ with open('eggs.csv') as csv_file:
                 )
             )
         )
+        corpusOriginal.append(data)
         corpus.append(text)
-        
+corpus_train, corpus_test = train_test_split( corpus, test_size=0.90, random_state=42)
+corpusOriginal_train,corpusOriginal_test = train_test_split( corpusOriginal, test_size=0.90, random_state=42)
 vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=500)
-X = vectorizer.fit_transform(corpus)
+X = vectorizer.fit_transform(corpus_train)
 print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
-X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
-clustering = KMeans(n_clusters=5, random_state=0).fit(X_train.toarray())
+#X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
+clustering = KMeans(n_clusters=5, random_state=0).fit(X.toarray())
 print (clustering.labels_)
+print (X)
 
 numpy.savetxt("labels.csv", clustering.labels_, delimiter=",")
 f = open("titres.csv", "w")
 f.write(str(vectorizer.get_feature_names()))
 f.close()
-numpy.savetxt("train.csv", X_train.toarray(), delimiter=",")
+numpy.savetxt("train.csv", X.toarray(), delimiter=",")
+
+with open('full.csv', 'w') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    for row in corpusOriginal_train:
+
+        spamwriter.writerow([row.replace("\n", "")])
+
 
 
 pca = PCA(n_components=100)
-X_pca = pca.fit_transform(X_train.toarray())
+X_pca = pca.fit_transform(X.toarray())
 
 plt.scatter(X_pca[:, 0], X_pca[:, 1], c=clustering.labels_,
                         cmap=plt.cm.nipy_spectral)
