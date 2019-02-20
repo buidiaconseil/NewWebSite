@@ -7,6 +7,7 @@ import nltk
 #nltk.download('stopwords')
 #nltk.download('punkt')
 import csv
+import numpy
 import nltk.data
 import re
 from nltk.corpus import stopwords
@@ -87,14 +88,21 @@ with open('eggs.csv') as csv_file:
         )
         corpus.append(text)
         
-vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=3000)
+vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=500)
 X = vectorizer.fit_transform(corpus)
 print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
 X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
 clustering = KMeans(n_clusters=5, random_state=0).fit(X_train.toarray())
-clustering
+print (clustering.labels_)
+
+numpy.savetxt("labels.csv", clustering.labels_, delimiter=",")
+f = open("titres.csv", "w")
+f.write(str(vectorizer.get_feature_names()))
+f.close()
+numpy.savetxt("train.csv", X_train.toarray(), delimiter=",")
+
 
 pca = PCA(n_components=100)
 X_pca = pca.fit_transform(X_train.toarray())
@@ -103,12 +111,5 @@ plt.scatter(X_pca[:, 0], X_pca[:, 1], c=clustering.labels_,
                         cmap=plt.cm.nipy_spectral)
 plt.show()
 
-te = TransactionEncoder()
-te_ary = te.fit(X_train.toarray()).transform(X_train.toarray())
-df = pd.DataFrame(te_ary, columns=te.columns_)
-frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
 
-frequent_itemsets
-
-association_rules(frequent_itemsets, metric="confidence", min_threshold=0.7)
 
