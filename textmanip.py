@@ -26,6 +26,9 @@ from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori
 import matplotlib.pyplot as plt
 from mlxtend.frequent_patterns import association_rules
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import Normalizer
+from sklearn.decomposition import TruncatedSVD
 
 sp_pattern = re.compile( """[\.\!\"\s\?\-\,\']+""", re.M)
 stupid_tokenizer = sp_pattern.split
@@ -82,21 +85,27 @@ with open('eggs.csv') as csv_file:
                     fr_stop,
                     stupid_tokenizer(data.replace("é", "e").replace("è", "e").replace("â", "a")
                                      .replace("ê", "e").replace("ù","u").replace("û","u")
-                                     .replace("ë","e").replace("ü","u").replace("à","a"))
+                                     .replace("ë","e").replace("ü","u").replace("à","a").replace(","," "))
                 )
             )
         )
         corpusOriginal.append(data)
         corpus.append(text)
-corpus_train, corpus_test = train_test_split( corpus, test_size=0.90, random_state=42)
-corpusOriginal_train,corpusOriginal_test = train_test_split( corpusOriginal, test_size=0.90, random_state=42)
-vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=500)
+corpus_train, corpus_test = train_test_split( corpus, test_size=0.85, random_state=42)
+corpusOriginal_train,corpusOriginal_test = train_test_split( corpusOriginal, test_size=0.85, random_state=42)
+vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=2000)
 X = vectorizer.fit_transform(corpus_train)
+pca = PCA(n_components=100)
+X_pca = pca.fit_transform(X.toarray())
+svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
+normalizer = Normalizer(copy=False)
+lsa = make_pipeline(svd, normalizer)
+Xsvd = lsa.fit_transform(X)
 print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
 #X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
-clustering = KMeans(n_clusters=5, random_state=0).fit(X.toarray())
+clustering = KMeans(n_clusters=4, random_state=0).fit(Xsvd)
 print (clustering.labels_)
 print (X)
 
@@ -110,7 +119,7 @@ with open('full.csv', 'w') as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     for row in corpusOriginal_train:
 
-        spamwriter.writerow([row.replace("\n", "")])
+        spamwriter.writerow([row.replace("\n", "").replace(",", " ")])
 
 
 
