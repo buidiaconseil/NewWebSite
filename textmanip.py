@@ -7,6 +7,7 @@ import nltk
 #nltk.download('stopwords')
 #nltk.download('punkt')
 import csv
+import numpy
 import nltk.data
 import re
 from nltk.corpus import stopwords
@@ -25,6 +26,9 @@ from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori
 import matplotlib.pyplot as plt
 from mlxtend.frequent_patterns import association_rules
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import Normalizer
+from sklearn.decomposition import TruncatedSVD
 
 sp_pattern = re.compile( """[\.\!\"\s\?\-\,\']+""", re.M)
 stupid_tokenizer = sp_pattern.split
@@ -70,7 +74,7 @@ text = " ".join(
 )
 
 corpus = []
-
+corpusOriginal = []
 with open('eggs.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     for row in csv_reader:
@@ -81,34 +85,50 @@ with open('eggs.csv') as csv_file:
                     fr_stop,
                     stupid_tokenizer(data.replace("é", "e").replace("è", "e").replace("â", "a")
                                      .replace("ê", "e").replace("ù","u").replace("û","u")
-                                     .replace("ë","e").replace("ü","u").replace("à","a"))
+                                     .replace("ë","e").replace("ü","u").replace("à","a").replace(","," "))
                 )
             )
         )
+        corpusOriginal.append(data)
         corpus.append(text)
-        
-vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=3000)
-X = vectorizer.fit_transform(corpus)
+corpus_train, corpus_test = train_test_split( corpus, test_size=0.80, random_state=42)
+corpusOriginal_train,corpusOriginal_test = train_test_split( corpusOriginal, test_size=0.80, random_state=42)
+vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=2200)
+X = vectorizer.fit_transform(corpus_train)
+pca = PCA(n_components=100)
+X_pca = pca.fit_transform(X.toarray())
+svd = TruncatedSVD(n_components=50, n_iter=50, random_state=42)
+normalizer = Normalizer(copy=False)
+lsa = make_pipeline(svd, normalizer)
+Xsvd = lsa.fit_transform(X)
 print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
-X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
-clustering = KMeans(n_clusters=5, random_state=0).fit(X_train.toarray())
-clustering
+#X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
+clustering = KMeans(n_clusters=3, random_state=0).fit(Xsvd)
+print (clustering.labels_)
+print (X)
+
+numpy.savetxt("labels.csv", clustering.labels_, delimiter=",")
+f = open("titres.csv", "w")
+f.write(str(vectorizer.get_feature_names()))
+f.close()
+numpy.savetxt("train.csv", X.toarray(), delimiter=",")
+
+with open('full.csv', 'w') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    for row in corpusOriginal_train:
+
+        spamwriter.writerow([row.replace("\n", "").replace(",", " ")])
+
+
 
 pca = PCA(n_components=100)
-X_pca = pca.fit_transform(X_train.toarray())
+X_pca = pca.fit_transform(X.toarray())
 
 plt.scatter(X_pca[:, 0], X_pca[:, 1], c=clustering.labels_,
                         cmap=plt.cm.nipy_spectral)
 plt.show()
 
-te = TransactionEncoder()
-te_ary = te.fit(X_train.toarray()).transform(X_train.toarray())
-df = pd.DataFrame(te_ary, columns=te.columns_)
-frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
 
-frequent_itemsets
-
-association_rules(frequent_itemsets, metric="confidence", min_threshold=0.7)
 

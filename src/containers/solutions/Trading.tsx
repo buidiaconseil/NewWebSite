@@ -5,80 +5,83 @@ import * as Papa from 'papaparse';
 import { RandomForestClassifier } from 'machinelearn/ensemble';
 import { SGDClassifier } from 'machinelearn/linear_model';
 import { KNeighborsClassifier } from 'machinelearn/neighbors';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
+import {
+  AreaChart, Area
+} from 'recharts';
 
 
-axios.get('indicators-ETH-BTC.csv')
+export default class Trading extends React.Component {
+  constructor(props) {
+    super(props);
 
-var Papa = require("papaparse/papaparse.min.js");
+    this.state = {
+      datasup: []
+    };
+    this.componentDidMount=this.componentDidMount.bind(this);
+    this.load=this.load.bind(this);
+  }
+  componentDidMount(){
+        this.load();
+  }
+  load() {
 
-axios.get('indicators-ETH-BTC.csv',{
-                                                                                                           headers: {
-                                                                                                                responseType: 'arraybuffer'
-                                                                                                           }
-                                                                                                       })
+    let currentComponent = this;
+    axios.get('indicators-ETH-BTC.csv',{
+                                                                                                               headers: {
+                                                                                                                    responseType: 'arraybuffer'
+                                                                                                               }
+                                                                                                           }).then(function (response) {
+        console.log(response);
+            console.log(typeof(response.data));
+            var data = Papa.parse(response.data,{
+                                               	dynamicTyping: true
+                                               });
+             console.log(data);
+            console.log(data.data.length);
+            var datasup=[]
+             for (var i=0;i<data.data.length;i++){
 
-  .then(function (response) {
-    // handle success
-    console.log(response);
-    console.log(typeof(response.data));
+                var line=data.data[i];
 
-    var data = Papa.parse(response.data,{
-                                       	dynamicTyping: true
-                                       });
-    var x=[];
-    var yLong=[];
-    var yShort=[];
-    var i;
-    console.log(data.data.length);
-    for (i = 0; i < data.data.length; i++) {
-      var col=data.data[i];
-      if(col[0]!=null){
-      yLong.push(col[0]);
-      yShort.push(col[1]);
-      var j;
-      var dataLine=[];
-          for (j = 2; j < col.length; j++) {
-               dataLine.push(col[j]);
-          }
+                datasup.push({short:line[0],long:line[1]});
+             }
+            currentComponent.setState({datasup})
+            console.log(datasup);
+      });
+  }
 
-      x.push(dataLine);
-      }
-    }
-    console.log(x.length);
-    console.log(yShort);
-    console.log(yLong);
-    console.log(x);
-    const randomForest = new RandomForestClassifier();
-    randomForest.fit(x, yLong);
-    console.log(randomForest.toJSON());
-    const clf = new SGDClassifier();
-    clf.fit(x, yLong);
-    console.log(clf.toJSON());
-    const knn = new KNeighborsClassifier();
-    knn.fit(x, yLong);
-    console.log(knn.toJSON());
-    const model = tf.sequential();
-    model.add(tf.layers.dense({units: 1, inputShape: [151]}));
-    model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
-    const xs = tf.tensor2d(x, [29,151]);
-    const ys = tf.tensor2d(yLong, [29,1]);
-    model.fit(xs, ys, {epochs: 10}).then(() => {
-        console.log(JSON.stringify(model.outputs[0].shape));
-    });
+  render() {
 
-
-    var decodedData=Papa.parse(response.data);
-    console.log(decodedData);
-
-  })
-
-
-
-const Development = () => (
-  <div>
+    return (
+<div>
     <h2>About Page</h2>
-
+<AreaChart width={730} height={250} data={this.state.datasup}
+  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+  <defs>
+    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+    </linearGradient>
+    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+    </linearGradient>
+  </defs>
+  <XAxis dataKey="name" />
+  <YAxis />
+  <CartesianGrid strokeDasharray="3 3" />
+  <Tooltip />
+  <Area type="monotone" dataKey="short" stroke="#ffffff" fillOpacity={1} fill="url(#colorUv)" />
+  <Area type="monotone" dataKey="long" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+</AreaChart>
   </div>
-);
+    );
+  }
+}
 
-export default Development;
+
+
+
