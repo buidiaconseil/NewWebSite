@@ -91,6 +91,7 @@ with open('eggs.csv') as csv_file:
         )
         corpusOriginal.append(data)
         corpus.append(text)
+<<<<<<< HEAD
 corpus_train, corpus_test = train_test_split( corpus, test_size=0.80, random_state=42)
 corpusOriginal_train,corpusOriginal_test = train_test_split( corpusOriginal, test_size=0.80, random_state=42)
 vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=2200)
@@ -98,6 +99,15 @@ X = vectorizer.fit_transform(corpus_train)
 pca = PCA(n_components=100)
 X_pca = pca.fit_transform(X.toarray())
 svd = TruncatedSVD(n_components=50, n_iter=50, random_state=42)
+=======
+corpus_train, corpus_test = train_test_split( corpus, test_size=0.85, random_state=42)
+corpusOriginal_train,corpusOriginal_test = train_test_split( corpusOriginal, test_size=0.85, random_state=42)
+vectorizer = TfidfVectorizer(ngram_range=(1,1), max_features=2000)
+X = vectorizer.fit_transform(corpus_train)
+pca = PCA(n_components=100)
+X_pca = pca.fit_transform(X.toarray())
+svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
+>>>>>>> 34789942ce88d804dc82c01f795872431a2e3ea7
 normalizer = Normalizer(copy=False)
 lsa = make_pipeline(svd, normalizer)
 Xsvd = lsa.fit_transform(X)
@@ -105,7 +115,11 @@ print(vectorizer.get_feature_names())
 print(X.shape)
 print(X)
 #X_train, X_test = train_test_split( X, test_size=0.90, random_state=42)
+<<<<<<< HEAD
 clustering = KMeans(n_clusters=3, random_state=0).fit(Xsvd)
+=======
+clustering = KMeans(n_clusters=4, random_state=0).fit(Xsvd)
+>>>>>>> 34789942ce88d804dc82c01f795872431a2e3ea7
 print (clustering.labels_)
 print (X)
 
