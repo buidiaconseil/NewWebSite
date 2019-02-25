@@ -237,6 +237,7 @@ for root, dirs, files in os.walk("."):
                         aval.append(resorted ['open'][counter])    
                         aval.append(resorted ['high'][counter])    
                         aval.append(resorted ['low'][counter])    
+                        aval.append(resorted ['close'][counter])    
                         aval.append(resorted ['volume'][counter])    
                         aval.append(resorted ['time'][counter])    
                         aval.append(bb_upperband[counter])

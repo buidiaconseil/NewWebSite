@@ -7,19 +7,16 @@ import Routes from "./Routes";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
-
 // tslint:disable-next-line:no-var-requires
 const reactLogo = require("./assets/React-icon.png");
 
 const App = () => (
   <HashRouter>
-    <span > <NavBar />
-    
-
-      
+    <span>
+      {" "}
+      <NavBar />
       <Routes />
-    
-    <Footer />
+      <Footer />
     </span>
   </HashRouter>
 );

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server -d",
     "build": "cross-env NODE_ENV=production webpack -p",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier --write src/**"
   },
   "keywords": [],
   "author": "",
@@ -69,6 +70,7 @@
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
+    "prettier": "1.16.4",
     "react-hot-loader": "^4.3.3",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.23.1",

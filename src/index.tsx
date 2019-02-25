@@ -22,7 +22,7 @@ const render = (Component: React.SFC) => {
     <AppContainer>
       <Component />
     </AppContainer>,
-    root,
+    root
   );
 };
 
